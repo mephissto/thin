@@ -9,7 +9,7 @@
     "capabilities": [
         "configurable"
     ],
-    "companyName": "Mephissto",
+    "companyName": "mephissto",
     "longName": "Thin moded",
     "projectType": "native",
     "resources": {
@@ -21,8 +21,8 @@
         "aplite",
         "basalt"
     ],
-    "uuid": "09988afe-adbb-4041-a126-9b2c92aea311",
-    "versionLabel": "1.6",
+    "uuid": "dec4c467-c86d-46a8-9a88-fe4a0faad477",
+    "versionLabel": "1.0",
     "watchapp": {
         "watchface": true
     }
