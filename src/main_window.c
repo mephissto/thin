@@ -179,7 +179,7 @@ static void draw_proc(Layer *layer, GContext *ctx) {
 
   // Draw hands
 #ifdef PBL_COLOR
-  graphics_context_set_stroke_color(ctx, GColorLightGray);
+  graphics_context_set_stroke_color(ctx, GColorCyan);
 #elif PBL_BW 
   graphics_context_set_stroke_color(ctx, GColorWhite);
 #endif
@@ -203,7 +203,7 @@ static void draw_proc(Layer *layer, GContext *ctx) {
     for(int y = 0; y < THICKNESS - 1; y++) {
       for(int x = 0; x < THICKNESS - 1; x++) {
 #ifdef PBL_COLOR
-        graphics_context_set_stroke_color(ctx, GColorDarkCandyAppleRed);
+        graphics_context_set_stroke_color(ctx, GColorVividCerulean);
 #elif PBL_BW
         graphics_context_set_stroke_color(ctx, GColorWhite);
 #endif
@@ -211,7 +211,7 @@ static void draw_proc(Layer *layer, GContext *ctx) {
 
         // Draw second hand tip
 #ifdef PBL_COLOR
-        graphics_context_set_stroke_color(ctx, GColorChromeYellow);
+        graphics_context_set_stroke_color(ctx, GColorCyan);
 #elif PBL_BW
         graphics_context_set_stroke_color(ctx, GColorWhite);
 #endif
@@ -263,7 +263,7 @@ static void window_load(Window *window) {
   text_layer_set_text_alignment(s_day_in_month_layer, GTextAlignmentCenter);
   text_layer_set_font(s_day_in_month_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 #ifdef PBL_COLOR
-  text_layer_set_text_color(s_day_in_month_layer, GColorChromeYellow);
+  text_layer_set_text_color(s_day_in_month_layer, GColorCyan);
 #elif PBL_BW
   text_layer_set_text_color(s_day_in_month_layer, GColorWhite);
 #endif

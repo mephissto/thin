@@ -4,7 +4,7 @@
 #include "config.h"
 
 int main() {
-  setlocale(LC_ALL, "");
+  setlocale(LC_ALL, "fr_FR");
   comm_init();
   config_init();
 
