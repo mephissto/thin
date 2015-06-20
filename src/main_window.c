@@ -142,6 +142,10 @@ static int hours_to_minutes(int hours_out_of_12) {
 }
 
 static void draw_proc(Layer *layer, GContext *ctx) {
+  
+  // Load theme setting
+  uint8_t theme = persist_read_int(PERSIST_KEY_THEME);
+  
   GRect bounds = layer_get_bounds(layer);
   GPoint center = grect_center_point(&bounds);  
 
@@ -179,7 +183,18 @@ static void draw_proc(Layer *layer, GContext *ctx) {
 
   // Draw hands
 #ifdef PBL_COLOR
-  graphics_context_set_stroke_color(ctx, GColorCyan);
+  if (theme == THEME_BLUE) {
+    graphics_context_set_stroke_color(ctx, GColorCyan);
+  }
+  else if (theme == THEME_GREEN) {
+    graphics_context_set_stroke_color(ctx, GColorGreen);
+  }
+  else if (theme == THEME_RED) {
+    graphics_context_set_stroke_color(ctx, GColorRed);
+  }
+  else if (theme == THEME_PURPLE) {
+    graphics_context_set_stroke_color(ctx, GColorMagenta);
+  }
 #elif PBL_BW 
   graphics_context_set_stroke_color(ctx, GColorWhite);
 #endif
@@ -203,7 +218,20 @@ static void draw_proc(Layer *layer, GContext *ctx) {
     for(int y = 0; y < THICKNESS - 1; y++) {
       for(int x = 0; x < THICKNESS - 1; x++) {
 #ifdef PBL_COLOR
-        graphics_context_set_stroke_color(ctx, GColorVividCerulean);
+  
+        if (theme == THEME_BLUE) {
+          graphics_context_set_stroke_color(ctx, GColorVividCerulean);
+        }
+        else if (theme == THEME_GREEN) {
+          graphics_context_set_stroke_color(ctx, GColorMintGreen);
+        }
+        else if (theme == THEME_RED) {
+          graphics_context_set_stroke_color(ctx, GColorMelon);
+        }
+        else if (theme == THEME_PURPLE) {
+          graphics_context_set_stroke_color(ctx, GColorRichBrilliantLavender);
+        }
+        
 #elif PBL_BW
         graphics_context_set_stroke_color(ctx, GColorWhite);
 #endif
@@ -211,7 +239,18 @@ static void draw_proc(Layer *layer, GContext *ctx) {
 
         // Draw second hand tip
 #ifdef PBL_COLOR
-        graphics_context_set_stroke_color(ctx, GColorCyan);
+        if (theme == THEME_BLUE) {
+          graphics_context_set_stroke_color(ctx, GColorCyan);
+        }
+        else if (theme == THEME_GREEN) {
+          graphics_context_set_stroke_color(ctx, GColorGreen);
+        }
+        else if (theme == THEME_RED) {
+          graphics_context_set_stroke_color(ctx, GColorRed);
+        }
+        else if (theme == THEME_PURPLE) {
+          graphics_context_set_stroke_color(ctx, GColorMagenta);
+        }
 #elif PBL_BW
         graphics_context_set_stroke_color(ctx, GColorWhite);
 #endif
@@ -263,7 +302,19 @@ static void window_load(Window *window) {
   text_layer_set_text_alignment(s_day_in_month_layer, GTextAlignmentCenter);
   text_layer_set_font(s_day_in_month_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
 #ifdef PBL_COLOR
-  text_layer_set_text_color(s_day_in_month_layer, GColorCyan);
+  uint8_t theme = persist_read_int(PERSIST_KEY_THEME);
+  if (theme == THEME_BLUE) {
+    text_layer_set_text_color(s_day_in_month_layer, GColorVividCerulean);
+  }
+  else if (theme == THEME_GREEN) {
+    text_layer_set_text_color(s_day_in_month_layer, GColorMintGreen);
+  }
+  else if (theme == THEME_RED) {
+    text_layer_set_text_color(s_day_in_month_layer, GColorMelon);
+  }
+  else if (theme == THEME_PURPLE) {
+    text_layer_set_text_color(s_day_in_month_layer, GColorRichBrilliantLavender);
+  }
 #elif PBL_BW
   text_layer_set_text_color(s_day_in_month_layer, GColorWhite);
 #endif

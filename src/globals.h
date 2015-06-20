@@ -21,6 +21,7 @@
 #define PERSIST_KEY_BT          2
 #define PERSIST_KEY_BATTERY     3
 #define PERSIST_KEY_SECOND_HAND 4
+#define PERSIST_KEY_THEME       5
 #define NUM_SETTINGS            5
 
 typedef struct {
@@ -29,3 +30,11 @@ typedef struct {
   int minutes;
   int seconds;
 } Time;
+
+// Theme IDs
+enum theme_id {
+  THEME_BLUE   = 0,
+  THEME_GREEN  = 1,
+  THEME_RED    = 2,
+  THEME_PURPLE = 3
+};

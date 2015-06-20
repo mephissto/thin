@@ -4,7 +4,8 @@
         "PERSIST_KEY_BT": 2,
         "PERSIST_KEY_DATE": 0,
         "PERSIST_KEY_DAY": 1,
-        "PERSIST_KEY_SECOND_HAND": 4
+        "PERSIST_KEY_SECOND_HAND": 4,
+        "PERSIST_KEY_THEME": 5
     },
     "capabilities": [
         "configurable"
@@ -22,7 +23,7 @@
         "basalt"
     ],
     "uuid": "dec4c467-c86d-46a8-9a88-fe4a0faad477",
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "watchapp": {
         "watchface": true
     }

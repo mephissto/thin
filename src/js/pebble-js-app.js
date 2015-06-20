@@ -5,7 +5,7 @@ Pebble.addEventListener('ready', function(e) {
 });
 
 Pebble.addEventListener('showConfiguration', function(e) {
-  Pebble.openURL('https://dl.dropboxusercontent.com/u/10824180/pebble%20config%20pages/thin-config.html?version=' + VERSION);
+  Pebble.openURL('http://mephissto.github.io/thin-config.html');
 });
 
 Pebble.addEventListener('webviewclosed', function(e) {
@@ -17,7 +17,10 @@ Pebble.addEventListener('webviewclosed', function(e) {
     "PERSIST_KEY_BT": '' + json.bluetooth,
     "PERSIST_KEY_BATTERY": '' + json.battery,
     "PERSIST_KEY_SECOND_HAND": '' + json.second_hand,
+    "PERSIST_KEY_THEME": '' + json.theme
   };
+  
+  console.log('____________________ Configuration window returned: ' + JSON.stringify(json));
 
   Pebble.sendAppMessage(options,
     function(e) {
