@@ -1,36 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Thin Configuration</title>
+    <title>Thin Moded Configuration</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   </head>
   <body>
-    <h2>Thin Configuration</h2>
+    <h2>Thin Modid Configuration</h2>
     <p>
-      Choose settings, click 'Save' and reload app to apply. 
+      Choose settings, click 'Save'. <br/>
+      <span style="font-weight: bold; color: red;">Reload app to apply by choosing another face and coming back to this one.</span>
     </p>
- 
+
     <table>
-      <tr><td>Show weekday/month</td><td><input id='check_date' type='checkbox'/></tr>
-      <tr><td>Show day of month</td><td><input id='check_day' type='checkbox'/></tr>
+      <tr><td>Show weekday/month</td><td><input id='check_date' type='checkbox'/></td></tr>
+      <tr><td>Show day of month</td><td><input id='check_day' type='checkbox'/></td></tr>
       <tr><td>Show disconnected indicator</td><td><input id='check_bluetooth' type='checkbox'/></td></tr>
-      <tr><td>Show battery level </td><td><input id='check_battery' type='checkbox'/></tr>
-      <tr><td>Show second hand</td><td><input id='check_second_hand' type='checkbox'/></tr>
+      <tr><td>Show battery level </td><td><input id='check_battery' type='checkbox'/></td></tr>
+      <tr><td>Show second hand</td><td><input id='check_second_hand' type='checkbox'/></td></tr>
+      <tr>
+        <td>Theme</td>
+        <td>
+          <select name="theme" id="theme">
+            <option value="blue" selected="selected">Blue</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+            <option value="purple">Purple</option>
+          </select>
+        </td>
+      </tr>
     </table>
+
+
 
     <p>
     <button id='save_button'>Save</button>
     </p>
 
-    <hr />
-    <h2>Version</h2>
-    <p id='current_version'>Current version:</p>
-    <p id='p_version'>Getting latest version...</p>
 
-    <hr />
-    <p>
-    <h2>Latest News</h2>
-    <p id='news'>Loading...</p>
-    </p>
 
     <script>
       function persistWrite(key, value) {
@@ -56,6 +62,7 @@
           persistWrite('bluetooth', 'true');
           persistWrite('battery', 'true');
           persistWrite('second_hand', 'true');
+          persistWrite('theme', 'blue');
         }
       }
 
@@ -65,45 +72,24 @@
         document.getElementById('check_bluetooth').checked = persistRead('bluetooth', 'false') === 'true';
         document.getElementById('check_battery').checked = persistRead('battery', 'false') === 'true';
         document.getElementById('check_second_hand').checked = persistRead('second_hand', 'false') === 'true';
+
+        $('#theme').find('option[value="' + persistRead('theme', 'blue') + '"]')
+          .siblings().removeAttr('selected')
+          .end().attr('selected', 'selected');
       }
 
-      function ajax(url, type, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-          callback(this.responseText);
-        };
-        xhr.open(type, url);
-        xhr.send();
-      };
-
-      function getAppVersionAndNews() {
-        //Get latest
-        ajax(
-          'https://dl.dropboxusercontent.com/u/10824180/pebble%20config%20pages/app_versions.json', 
-          'GET',
-          function(responseText) {
-            var json = JSON.parse(responseText);
-            document.getElementById('p_version').innerHTML = 'Latest version: ' + json.thin;
-            document.getElementById('news').innerHTML = '' + json.thinnews;
-          }
-        );
-
-        //Get local
-        var version = '' + document.location;
-        version = version.substring(version.indexOf('version=') + 'version='.length);
-        document.getElementById('current_version').innerHTML = 'Current version: ' + version;
-      }
 
       var submitButton = document.getElementById('save_button');
-      submitButton.addEventListener('click', 
+      submitButton.addEventListener('click',
         function() {
           var options = {
             'date': document.getElementById('check_date').checked ? 'true' : 'false',
             'day': document.getElementById('check_day').checked ? 'true' : 'false',
             'bluetooth': document.getElementById('check_bluetooth').checked ? 'true' : 'false',
             'battery': document.getElementById('check_battery').checked ? 'true' : 'false',
-            'second_hand': document.getElementById('check_second_hand').checked ? 'true' : 'false'
-          };  
+            'second_hand': document.getElementById('check_second_hand').checked ? 'true' : 'false',
+            'theme': '' + $('#theme').val()
+          };
           var location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
 
           persistWrite('date', options.date);
@@ -111,12 +97,12 @@
           persistWrite('bluetooth', options.bluetooth);
           persistWrite('battery', options.battery);
           persistWrite('second_hand', options.second_hand);
+          persistWrite('theme', options.theme);
 
           document.location = location;
-        }, 
+        },
       false);
 
-      getAppVersionAndNews();
       firstTimeSetup();
       loadConfig();
     </script>
